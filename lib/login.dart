@@ -40,6 +40,13 @@ class _LoginState extends State<Login> {
                           color: HexColor('#A8617A'))),
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Container(
+                    height: MediaQuery.of(context).size.height * 0.3,
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    child: Image.asset('images/main.png')),
+              ),
               Spacer(),
               Align(
                 alignment: FractionalOffset.bottomCenter,
