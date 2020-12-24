@@ -70,9 +70,88 @@ class _HomeWidgetState extends State<HomeWidget> {
       floatingActionButton: FloatingActionButton(
           backgroundColor: HexColor('#FF84AF'),
           onPressed: () {
-            print(time);
+            _popup(context);
           },
           child: Icon(Icons.add)),
     );
   }
+}
+
+void _popup(BuildContext context) {
+  showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          content: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              color: HexColor('#FFE3F2'),
+            ),
+            height: MediaQuery.of(context).size.height * 0.25,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Daily blog",
+                        style: TextStyle(
+                            color: HexColor('#A8617A'),
+                            fontFamily: 'Gotham',
+                            fontSize: 20),
+                      ),
+                      Icon(
+                        Icons.edit,
+                        size: 20,
+                        color: HexColor('#A8617A'),
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Add a voicenote",
+                        style: TextStyle(
+                            color: HexColor('#A8617A'),
+                            fontFamily: 'Gotham',
+                            fontSize: 20),
+                      ),
+                      Icon(
+                        Icons.mic,
+                        color: HexColor('#A8617A'),
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Join live seminar",
+                        style: TextStyle(
+                            color: HexColor('#A8617A'),
+                            fontFamily: 'Gotham',
+                            fontSize: 20),
+                      ),
+                      Icon(
+                        Icons.video_call,
+                        color: HexColor('#A8617A'),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          contentPadding: EdgeInsets.all(0.0),
+        );
+      });
 }
