@@ -43,35 +43,62 @@ class _HomeState extends State<Home> {
                           fontSize: 20,
                           color: HexColor('#7D7D7D'))),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.2,
-                    width: MediaQuery.of(context).size.width * 1,
-                    child: Card(
-                      color: HexColor('#FF84AF'),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Text(
-                                  "Daily Motivation",
-                                  style: TextStyle(
-                                      fontFamily: 'Gotham',
-                                      color: Colors.white,
-                                      fontSize: 20),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * 0.23,
+                          width: MediaQuery.of(context).size.width * 0.95,
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                                gradient: LinearGradient(colors: [
+                                  HexColor('#FF84AF'),
+                                  HexColor('#CA82CC')
+                                ])),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: Icon(
+                                    Icons.thumb_up_outlined,
+                                    color: HexColor('#7D7D7D'),
+                                  ),
                                 ),
-                              )
-                            ],
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Text(
+                                        "Daily Motivation",
+                                        style: TextStyle(
+                                            fontFamily: 'Gotham',
+                                            color: Colors.white,
+                                            fontSize: 20),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Text(
+                                    "All our dreams can come true, if we have the courage to pursue them. – Walt Disney.",
+                                    style: TextStyle(
+                                        fontFamily: 'Gotham',
+                                        color: HexColor('#A8617A'),
+                                        fontSize: 15),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ],
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
               ],
