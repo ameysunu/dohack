@@ -1,6 +1,6 @@
+import 'package:dohack/homewidget.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'home.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
 import 'login.dart';
@@ -24,7 +24,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
   final introKey = GlobalKey<IntroductionScreenState>();
   void _onIntroEnd(context) {
     Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (_) => Home()),
+      MaterialPageRoute(builder: (_) => HomeWidget()),
     );
   }
 
