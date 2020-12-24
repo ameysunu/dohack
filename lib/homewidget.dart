@@ -19,7 +19,7 @@ class _HomeWidgetState extends State<HomeWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: HexColor('#FFDFCA'),
+          backgroundColor: HexColor('#E8DFF1'),
           type: BottomNavigationBarType.fixed,
           currentIndex: _selectedIndex,
           showSelectedLabels: false,
@@ -36,17 +36,17 @@ class _HomeWidgetState extends State<HomeWidget> {
             ),
             BottomNavigationBarItem(
               icon:
-                  new Icon(CupertinoIcons.waveform, color: HexColor('#5C6178')),
+                  new Icon(Icons.multitrack_audio, color: HexColor('#5C6178')),
               title: new Text(
-                'Home',
+                'Graph',
                 style:
                     TextStyle(color: HexColor('#5C6178'), fontFamily: 'Gotham'),
               ),
             ),
             BottomNavigationBarItem(
-              icon: new Icon(Icons.support, color: HexColor('#5C6178')),
+              icon: new Icon(Icons.mood, color: HexColor('#5C6178')),
               title: new Text(
-                'Home',
+                'Mood',
                 style:
                     TextStyle(color: HexColor('#5C6178'), fontFamily: 'Gotham'),
               ),
@@ -68,8 +68,9 @@ class _HomeWidgetState extends State<HomeWidget> {
       body: _widgetOptions.elementAt(_selectedIndex),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
+          backgroundColor: HexColor('#FF84AF'),
           onPressed: () {
-            null;
+            print(time);
           },
           child: Icon(Icons.add)),
     );
