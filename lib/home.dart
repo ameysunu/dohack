@@ -74,7 +74,7 @@ class _HomeState extends State<Home> {
                                     Padding(
                                       padding: const EdgeInsets.all(10.0),
                                       child: Text(
-                                        "Daily Motivation",
+                                        "Daily Motivation".toUpperCase(),
                                         style: TextStyle(
                                             fontFamily: 'Gotham',
                                             color: Colors.white,
@@ -87,6 +87,57 @@ class _HomeState extends State<Home> {
                                   padding: const EdgeInsets.all(10.0),
                                   child: Text(
                                     "All our dreams can come true, if we have the courage to pursue them. – Walt Disney.",
+                                    style: TextStyle(
+                                        fontFamily: 'Gotham',
+                                        color: HexColor('#A8617A'),
+                                        fontSize: 15),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * 0.23,
+                          width: MediaQuery.of(context).size.width * 0.95,
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                                gradient: LinearGradient(colors: [
+                                  HexColor('#FFA583'),
+                                  HexColor('#EAD74F')
+                                ])),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: Icon(
+                                    Icons.lock_clock,
+                                    color: HexColor('#7D7D7D'),
+                                  ),
+                                ),
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Text(
+                                        "Reminder".toUpperCase(),
+                                        style: TextStyle(
+                                            fontFamily: 'Gotham',
+                                            color: Colors.white,
+                                            fontSize: 20),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Text(
+                                    "Be reminded of all important things for the day.",
                                     style: TextStyle(
                                         fontFamily: 'Gotham',
                                         color: HexColor('#A8617A'),
