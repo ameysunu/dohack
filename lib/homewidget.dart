@@ -92,60 +92,74 @@ void _popup(BuildContext context) {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Daily blog",
-                        style: TextStyle(
+                  child: InkWell(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Daily blog",
+                            style: TextStyle(
+                                color: HexColor('#A8617A'),
+                                fontFamily: 'Gotham',
+                                fontSize: 20),
+                          ),
+                          Icon(
+                            Icons.edit,
+                            size: 20,
                             color: HexColor('#A8617A'),
-                            fontFamily: 'Gotham',
-                            fontSize: 20),
+                          )
+                        ],
                       ),
-                      Icon(
-                        Icons.edit,
-                        size: 20,
-                        color: HexColor('#A8617A'),
-                      )
-                    ],
+                      onTap: () {
+                        print("Daily Blog tapped");
+                      }),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: InkWell(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Add a voicenote",
+                          style: TextStyle(
+                              color: HexColor('#A8617A'),
+                              fontFamily: 'Gotham',
+                              fontSize: 20),
+                        ),
+                        Icon(
+                          Icons.mic,
+                          color: HexColor('#A8617A'),
+                        )
+                      ],
+                    ),
+                    onTap: () {
+                      print("Voicenote tapped");
+                    },
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Add a voicenote",
-                        style: TextStyle(
-                            color: HexColor('#A8617A'),
-                            fontFamily: 'Gotham',
-                            fontSize: 20),
-                      ),
-                      Icon(
-                        Icons.mic,
-                        color: HexColor('#A8617A'),
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Join live seminar",
-                        style: TextStyle(
-                            color: HexColor('#A8617A'),
-                            fontFamily: 'Gotham',
-                            fontSize: 20),
-                      ),
-                      Icon(
-                        Icons.video_call,
-                        color: HexColor('#A8617A'),
-                      )
-                    ],
+                  child: InkWell(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Join live seminar",
+                          style: TextStyle(
+                              color: HexColor('#A8617A'),
+                              fontFamily: 'Gotham',
+                              fontSize: 20),
+                        ),
+                        Icon(
+                          Icons.video_call,
+                          color: HexColor('#A8617A'),
+                        )
+                      ],
+                    ),
+                    onTap: () {
+                      print("Seminar tapped");
+                    },
                   ),
                 ),
               ],
