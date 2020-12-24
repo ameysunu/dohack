@@ -1,4 +1,5 @@
 import 'package:dohack/home.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
@@ -21,10 +22,12 @@ class _HomeWidgetState extends State<HomeWidget> {
           backgroundColor: HexColor('#FFDFCA'),
           type: BottomNavigationBarType.fixed,
           currentIndex: _selectedIndex,
-          showSelectedLabels: true,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
           items: [
             BottomNavigationBarItem(
-              icon: new Icon(Icons.home, color: HexColor('#5C6178')),
+              icon:
+                  new Icon(Icons.dashboard_rounded, color: HexColor('#5C6178')),
               title: new Text(
                 'Home',
                 style:
@@ -32,9 +35,18 @@ class _HomeWidgetState extends State<HomeWidget> {
               ),
             ),
             BottomNavigationBarItem(
-              icon: new Icon(Icons.video_call, color: HexColor('#5C6178')),
+              icon:
+                  new Icon(CupertinoIcons.waveform, color: HexColor('#5C6178')),
               title: new Text(
-                'Meet',
+                'Home',
+                style:
+                    TextStyle(color: HexColor('#5C6178'), fontFamily: 'Gotham'),
+              ),
+            ),
+            BottomNavigationBarItem(
+              icon: new Icon(Icons.support, color: HexColor('#5C6178')),
+              title: new Text(
+                'Home',
                 style:
                     TextStyle(color: HexColor('#5C6178'), fontFamily: 'Gotham'),
               ),
@@ -54,6 +66,12 @@ class _HomeWidgetState extends State<HomeWidget> {
             });
           }),
       body: _widgetOptions.elementAt(_selectedIndex),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            null;
+          },
+          child: Icon(Icons.add)),
     );
   }
 }

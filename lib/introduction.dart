@@ -67,8 +67,8 @@ class _IntroductionPageState extends State<IntroductionPage> {
               title: "It's always happy hour!",
               bodyWidget: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text("We are always here for you.", style: bodyStyle),
+                children: [
+                  Text("We are always here for you $name.", style: bodyStyle),
                 ],
               ),
               image: _buildImage('happy'),
