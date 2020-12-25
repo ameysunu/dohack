@@ -145,14 +145,14 @@ void _popup(BuildContext context) {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Join live seminar",
+                          "Enter mood",
                           style: TextStyle(
                               color: HexColor('#A8617A'),
                               fontFamily: 'Gotham',
                               fontSize: 20),
                         ),
                         Icon(
-                          Icons.video_call,
+                          Icons.mood,
                           color: HexColor('#A8617A'),
                         )
                       ],

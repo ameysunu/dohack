@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'login.dart';
 import 'quotes.dart' as quotes;
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:intl/intl.dart';
 
 var time = DateTime.now().hour;
+
+var newTime = DateTime.now();
+String formattedDate = DateFormat('kk:mm').format(newTime);
 
 String greeting = greetings();
 
@@ -152,6 +157,129 @@ class _HomeState extends State<Home> {
                     ],
                   ),
                 ),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.05,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Slidable(
+                    actionPane: SlidableDrawerActionPane(),
+                    actionExtentRatio: 0.25,
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * 0.15,
+                        width: MediaQuery.of(context).size.width * 0.7,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15.0),
+                            color: Colors.white,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Text(
+                                      "25 December 2020".toUpperCase(),
+                                      style: TextStyle(
+                                          fontFamily: 'Gotham',
+                                          color: Colors.grey,
+                                          fontSize: 15),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Text(
+                                  "Feeling awesome",
+                                  style: TextStyle(
+                                      fontFamily: 'Gotham',
+                                      color: Colors.black,
+                                      fontSize: 15),
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Text(
+                                      formattedDate,
+                                      style: TextStyle(
+                                        fontFamily: 'Gotham',
+                                        color: HexColor('#A8617A'),
+                                      ),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Icon(
+                                        Icons.mood,
+                                        color: HexColor('#A8617A'),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    secondaryActions: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15.0),
+                            color: HexColor('#BEA6A0'),
+                          ),
+                          child: Container(
+                            child: IconButton(
+                              icon: Icon(Icons.edit, color: Colors.white),
+                              onPressed: () {
+                                print("Edit triggered");
+                              },
+                            ),
+                          ),
+                          // child: IconSlideAction(
+                          //   caption: 'Edit',
+                          //   icon: Icons.edit,
+                          //   onTap: () => print("more"),
+                          // ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15.0),
+                            color: HexColor('#FF0D0D'),
+                          ),
+                          child: Container(
+                            child: IconButton(
+                              icon: Icon(Icons.delete, color: Colors.white),
+                              onPressed: () {
+                                print("Delete triggered");
+                              },
+                            ),
+                          ),
+                          // child: IconSlideAction(
+                          //   caption: 'Edit',
+                          //   icon: Icons.edit,
+                          //   onTap: () => print("more"),
+                          // ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
               ],
             ),
           ),
