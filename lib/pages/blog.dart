@@ -16,6 +16,7 @@ class _BlogState extends State<Blog> {
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
       child: Scaffold(
+        resizeToAvoidBottomPadding: false,
         backgroundColor: HexColor('#FF84AF'),
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -43,6 +44,72 @@ class _BlogState extends State<Blog> {
                   style: TextStyle(
                       fontFamily: 'Gotham', color: Colors.white, fontSize: 16),
                 )),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.08,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: HexColor('#DC7196'),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: TextFormField(
+                      style:
+                          TextStyle(color: Colors.white, fontFamily: 'Gotham'),
+                      decoration: new InputDecoration(
+                        focusedBorder: InputBorder.none,
+                        errorBorder: InputBorder.none,
+                        disabledBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        hintStyle: TextStyle(
+                          fontFamily: 'Gotham',
+                          color: Colors.black54,
+                          fontSize: 15,
+                        ),
+                        labelStyle: TextStyle(
+                            fontFamily: 'Gotham', color: Colors.white),
+                        hintText: 'Title',
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: HexColor('#DC7196'),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: SingleChildScrollView(
+                      child: TextFormField(
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
+                        style: TextStyle(
+                            color: Colors.white, fontFamily: 'Gotham'),
+                        decoration: new InputDecoration(
+                          focusedBorder: InputBorder.none,
+                          errorBorder: InputBorder.none,
+                          disabledBorder: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          hintStyle: TextStyle(
+                            fontFamily: 'Gotham',
+                            color: Colors.black54,
+                            fontSize: 15,
+                          ),
+                          labelStyle: TextStyle(
+                              fontFamily: 'Gotham', color: Colors.white),
+                          hintText: 'Add your blog\'s body',
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
