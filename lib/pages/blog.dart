@@ -137,6 +137,7 @@ class _BlogState extends State<Blog> {
                           side: BorderSide(color: HexColor('#FF84AF'))),
                       onPressed: () {
                         print("Swedish house mafia");
+                        Navigator.pop(context);
                       },
                       color: Colors.white,
                       textColor: HexColor('#FF84AF'),
