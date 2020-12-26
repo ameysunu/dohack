@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
 
+final titleController = TextEditingController();
+final bodyController = TextEditingController();
+
 DateTime now = DateTime.now();
 String newDate = DateFormat('EEE d MMM, kk:mm').format(now);
 
@@ -47,6 +50,14 @@ class _BlogState extends State<Blog> {
               ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  "Daily Blog".toUpperCase(),
+                  style: TextStyle(
+                      fontFamily: 'Gotham', color: Colors.white, fontSize: 18),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.08,
                   decoration: BoxDecoration(
@@ -56,6 +67,7 @@ class _BlogState extends State<Blog> {
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: TextFormField(
+                      controller: titleController,
                       style:
                           TextStyle(color: Colors.white, fontFamily: 'Gotham'),
                       decoration: new InputDecoration(
@@ -88,6 +100,7 @@ class _BlogState extends State<Blog> {
                     padding: const EdgeInsets.all(10.0),
                     child: SingleChildScrollView(
                       child: TextFormField(
+                        controller: bodyController,
                         keyboardType: TextInputType.multiline,
                         maxLines: null,
                         style: TextStyle(
@@ -106,6 +119,35 @@ class _BlogState extends State<Blog> {
                               fontFamily: 'Gotham', color: Colors.white),
                           hintText: 'Add your blog\'s body',
                         ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Spacer(),
+              Align(
+                alignment: FractionalOffset.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: ButtonTheme(
+                    height: 50,
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                          side: BorderSide(color: HexColor('#FF84AF'))),
+                      onPressed: () {
+                        print("Swedish house mafia");
+                      },
+                      color: Colors.white,
+                      textColor: HexColor('#FF84AF'),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Center(
+                            child: Text("Done".toUpperCase(),
+                                style: TextStyle(fontFamily: 'Gotham')),
+                          ),
+                        ],
                       ),
                     ),
                   ),
