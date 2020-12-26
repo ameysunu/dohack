@@ -1,4 +1,5 @@
 import 'package:dohack/home.dart';
+import 'package:dohack/pages/blog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -112,6 +113,13 @@ void _popup(BuildContext context) {
                       ),
                       onTap: () {
                         print("Daily Blog tapped");
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return Blog();
+                            },
+                          ),
+                        );
                       }),
                 ),
                 Padding(
