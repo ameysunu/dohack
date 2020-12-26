@@ -138,8 +138,9 @@ class _BlogState extends State<Blog> {
                           borderRadius: BorderRadius.circular(20.0),
                           side: BorderSide(color: HexColor('#FF84AF'))),
                       onPressed: () {
-                        print("Swedish house mafia");
                         newRecord();
+                        print("Swedish house mafia");
+                        clear();
                         Navigator.pop(context);
                       },
                       color: Colors.white,
@@ -172,7 +173,13 @@ void newRecord() async {
       .set({
     "title": titleController.text,
     "body": bodyController.text,
+    "time": "$newDate",
   }).then((_) {
     print("success!");
   });
+}
+
+void clear() {
+  titleController.clear();
+  bodyController.clear();
 }
