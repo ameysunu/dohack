@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 final titleController = TextEditingController();
 final bodyController = TextEditingController();
+final firestoreInstance = FirebaseFirestore.instance;
 
 DateTime now = DateTime.now();
 String newDate = DateFormat('EEE d MMM, kk:mm').format(now);
@@ -137,6 +139,7 @@ class _BlogState extends State<Blog> {
                           side: BorderSide(color: HexColor('#FF84AF'))),
                       onPressed: () {
                         print("Swedish house mafia");
+                        newRecord();
                         Navigator.pop(context);
                       },
                       color: Colors.white,
@@ -160,4 +163,16 @@ class _BlogState extends State<Blog> {
       ),
     );
   }
+}
+
+void newRecord() async {
+  firestoreInstance
+      .collection('blog')
+      .doc('${now.day}${now.month}${now.year}')
+      .set({
+    "title": titleController.text,
+    "body": bodyController.text,
+  }).then((_) {
+    print("success!");
+  });
 }
