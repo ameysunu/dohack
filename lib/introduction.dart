@@ -31,12 +31,12 @@ class _IntroductionPageState extends State<IntroductionPage> {
   @override
   Widget build(BuildContext context) {
     const bodyStyle = TextStyle(
-        fontSize: 19.0,
+        fontSize: 18.0,
         fontFamily: 'Gotham',
         color: Color.fromRGBO(168, 97, 122, 1));
     const pageDecoration = const PageDecoration(
       titleTextStyle: TextStyle(
-          fontSize: 28.0,
+          fontSize: 26.0,
           fontWeight: FontWeight.w700,
           fontFamily: 'Gotham',
           color: Colors.white),

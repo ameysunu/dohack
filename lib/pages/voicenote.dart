@@ -172,41 +172,90 @@ class _RecognizeContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(10.0, 20, 10, 10),
-      child: Container(
-        height: MediaQuery.of(context).size.height * 0.4,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: HexColor('#DC7196'),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: SingleChildScrollView(
-            child: TextFormField(
-              enabled: false,
-              controller: voiceController,
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-              style: TextStyle(color: Colors.white, fontFamily: 'Gotham'),
-              decoration: new InputDecoration(
-                focusedBorder: InputBorder.none,
-                errorBorder: InputBorder.none,
-                disabledBorder: InputBorder.none,
-                enabledBorder: InputBorder.none,
-                hintStyle: TextStyle(
-                  fontFamily: 'Gotham',
-                  color: Colors.black54,
-                  fontSize: 15,
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(10.0, 20, 10, 10),
+          child: Container(
+            height: MediaQuery.of(context).size.height * 0.4,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              color: HexColor('#DC7196'),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: SingleChildScrollView(
+                child: TextFormField(
+                  enabled: false,
+                  controller: voiceController,
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null,
+                  style: TextStyle(color: Colors.white, fontFamily: 'Gotham'),
+                  decoration: new InputDecoration(
+                    focusedBorder: InputBorder.none,
+                    errorBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    hintStyle: TextStyle(
+                      fontFamily: 'Gotham',
+                      color: Colors.black54,
+                      fontSize: 15,
+                    ),
+                    labelStyle:
+                        TextStyle(fontFamily: 'Gotham', color: Colors.white),
+                    hintText: text,
+                  ),
                 ),
-                labelStyle:
-                    TextStyle(fontFamily: 'Gotham', color: Colors.white),
-                hintText: text,
               ),
             ),
           ),
         ),
-      ),
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: ButtonTheme(
+            height: 50,
+            child: RaisedButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18.0),
+                  side: BorderSide(color: HexColor('#FF84AF'))),
+              onPressed: () {
+                newVoice();
+                print("done");
+                Navigator.pop(context);
+              },
+              color: Colors.white,
+              textColor: HexColor('#FF84AF'),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Center(
+                    child: Text("Done".toUpperCase(),
+                        style: TextStyle(fontFamily: 'Gotham')),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
+}
+
+void newVoice() async {
+  firestoreInstance
+      .collection('blog')
+      .doc('voicenote')
+      .collection('voice')
+      .doc('${now.day}${now.month}${now.year}')
+      .set({
+    "voice": _RecognizeContent().text,
+    "time": "$newDate",
+  }).then((_) {
+    print("success!");
+  });
+}
+
+void clear() {
+  voiceController.clear();
 }
