@@ -1,5 +1,6 @@
 import 'package:dohack/home.dart';
 import 'package:dohack/pages/blog.dart';
+import 'package:dohack/pages/voicenote.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -143,6 +144,13 @@ void _popup(BuildContext context) {
                     ),
                     onTap: () {
                       print("Voicenote tapped");
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return Voice();
+                          },
+                        ),
+                      );
                     },
                   ),
                 ),
