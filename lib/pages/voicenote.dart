@@ -6,6 +6,7 @@ import 'package:sound_stream/sound_stream.dart';
 import 'blog.dart';
 
 final voiceController = TextEditingController();
+String hint = "I'll note down everything you say.";
 
 class Voice extends StatefulWidget {
   @override
@@ -126,42 +127,10 @@ class _VoiceState extends State<Voice> {
                       color: HexColor('#FFFFFF')),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(10.0, 20, 10, 10),
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.4,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: HexColor('#DC7196'),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: SingleChildScrollView(
-                      child: TextFormField(
-                        controller: voiceController,
-                        keyboardType: TextInputType.multiline,
-                        maxLines: null,
-                        style: TextStyle(
-                            color: Colors.white, fontFamily: 'Gotham'),
-                        decoration: new InputDecoration(
-                          focusedBorder: InputBorder.none,
-                          errorBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          hintStyle: TextStyle(
-                            fontFamily: 'Gotham',
-                            color: Colors.black54,
-                            fontSize: 15,
-                          ),
-                          labelStyle: TextStyle(
-                              fontFamily: 'Gotham', color: Colors.white),
-                          hintText: 'I\'ll note down everything you say.',
-                        ),
-                      ),
-                    ),
-                  ),
+              if (recognizeFinished)
+                _RecognizeContent(
+                  text: text,
                 ),
-              ),
               Spacer(),
               Align(
                 alignment: Alignment.bottomCenter,
@@ -171,18 +140,70 @@ class _VoiceState extends State<Voice> {
                     backgroundColor: Colors.white,
                     radius: 40,
                     child: IconButton(
-                        icon: Icon(
-                          Icons.multitrack_audio,
-                          size: 30,
-                          color: HexColor('#A8617A'),
-                        ),
-                        onPressed: () {
-                          print("record pressed");
-                        }),
+                      icon: recognizing
+                          ? Icon(
+                              Icons.stop,
+                              size: 30,
+                              color: HexColor('#A8617A'),
+                            )
+                          : Icon(
+                              Icons.multitrack_audio,
+                              size: 30,
+                              color: HexColor('#A8617A'),
+                            ),
+                      onPressed:
+                          recognizing ? stopRecording : streamingRecognize,
+                    ),
                   ),
                 ),
               )
             ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _RecognizeContent extends StatelessWidget {
+  final String text;
+
+  const _RecognizeContent({Key key, this.text}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(10.0, 20, 10, 10),
+      child: Container(
+        height: MediaQuery.of(context).size.height * 0.4,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          color: HexColor('#DC7196'),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: SingleChildScrollView(
+            child: TextFormField(
+              enabled: false,
+              controller: voiceController,
+              keyboardType: TextInputType.multiline,
+              maxLines: null,
+              style: TextStyle(color: Colors.white, fontFamily: 'Gotham'),
+              decoration: new InputDecoration(
+                focusedBorder: InputBorder.none,
+                errorBorder: InputBorder.none,
+                disabledBorder: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                hintStyle: TextStyle(
+                  fontFamily: 'Gotham',
+                  color: Colors.black54,
+                  fontSize: 15,
+                ),
+                labelStyle:
+                    TextStyle(fontFamily: 'Gotham', color: Colors.white),
+                hintText: text,
+              ),
+            ),
           ),
         ),
       ),
