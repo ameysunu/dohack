@@ -31,6 +31,8 @@ dependencies:
   http:
   flutter_slidable: ^0.5.7
   cloud_firestore: ^0.14.4
+  google_speech: ^1.2.1
+  sound_stream: ^0.2.0
 
 
   # The following adds the Cupertino Icons font to your application.

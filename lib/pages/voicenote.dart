@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:google_speech/google_speech.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:sound_stream/sound_stream.dart';
 import 'blog.dart';
 
 final voiceController = TextEditingController();
@@ -10,9 +13,67 @@ class Voice extends StatefulWidget {
 }
 
 class _VoiceState extends State<Voice> {
+  bool recognizing = false;
+  bool recognizeFinished = false;
+  String text = '';
+  static final _users = <int>[];
+  final _infoStrings = <String>[];
+  bool muted = false;
+
+  final RecorderStream _recorder = RecorderStream();
+
+  @override
+  void initState() {
+    super.initState();
+    _recorder.initialize();
+  }
+
+  void streamingRecognize() async {
+    await _recorder.start();
+
+    setState(() {
+      recognizing = true;
+    });
+    final serviceAccount = ServiceAccount.fromString(
+        '${(await rootBundle.loadString('assets/test_service_account.json'))}');
+    final speechToText = SpeechToText.viaServiceAccount(serviceAccount);
+    final config = _getConfig();
+
+    final responseStream = speechToText.streamingRecognize(
+        StreamingRecognitionConfig(config: config, interimResults: true),
+        _recorder.audioStream);
+
+    responseStream.listen((data) {
+      setState(() {
+        text =
+            data.results.map((e) => e.alternatives.first.transcript).join('\n');
+        recognizeFinished = true;
+      });
+    }, onDone: () {
+      setState(() {
+        recognizing = false;
+      });
+    });
+  }
+
+  void stopRecording() async {
+    await _recorder.stop();
+    setState(() {
+      recognizing = false;
+    });
+  }
+
+  RecognitionConfig _getConfig() => RecognitionConfig(
+      encoding: AudioEncoding.LINEAR16,
+      model: RecognitionModel.basic,
+      enableAutomaticPunctuation: true,
+      sampleRateHertz: 16000,
+      languageCode: 'en-US');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       backgroundColor: HexColor('#FF84AF'),
       appBar: AppBar(
         automaticallyImplyLeading: false,
