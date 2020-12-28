@@ -45,7 +45,17 @@ class _MoodState extends State<Mood> {
                   ),
                 )),
                 Container(
-                  height: MediaQuery.of(context).size.height * 0.1,
+                  height: MediaQuery.of(context).size.height * 0.05,
+                ),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.25,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Image.asset('images/back.png'),
+                  ),
+                ),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.05,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -96,6 +106,35 @@ class _MoodState extends State<Mood> {
                               );
                             }).toList(),
                           ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Spacer(),
+                Align(
+                  alignment: FractionalOffset.bottomCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: ButtonTheme(
+                      height: 50,
+                      child: RaisedButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                            side: BorderSide(color: HexColor('#FF84AF'))),
+                        onPressed: () {
+                          print("Cash Cash");
+                        },
+                        color: Colors.white,
+                        textColor: HexColor('#FF84AF'),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Center(
+                              child: Text("Continue".toUpperCase(),
+                                  style: TextStyle(fontFamily: 'Gotham')),
+                            ),
+                          ],
                         ),
                       ),
                     ),
