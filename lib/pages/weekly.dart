@@ -22,12 +22,12 @@ class _WeekState extends State<Week> {
   Widget build(BuildContext context) {
     var data = [
       ClicksPerYear('S', 12, HexColor('#FD85B8')),
-      ClicksPerYear('M', 35, HexColor('#FF949B')),
-      ClicksPerYear('T', 42, HexColor('#FFB07D')),
-      ClicksPerYear('W', 38, HexColor('#FFD36A')),
-      ClicksPerYear('T', 42, HexColor('#8D84DD')),
-      ClicksPerYear('F', 47, HexColor('#007FA7')),
-      ClicksPerYear('S', 25, HexColor('#FF949B')),
+      ClicksPerYear('M', 35, HexColor('#FD85B8')),
+      ClicksPerYear('T', 42, HexColor('#FD85B8')),
+      ClicksPerYear('W', 38, HexColor('#FD85B8')),
+      ClicksPerYear('T', 42, HexColor('#FD85B8')),
+      ClicksPerYear('F', 47, HexColor('#FD85B8')),
+      ClicksPerYear('S', 25, HexColor('#FD85B8')),
     ];
 
     var series = [
@@ -135,6 +135,41 @@ class _WeekState extends State<Week> {
                                 color: Colors.black54),
                           ),
                         )
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    width: MediaQuery.of(context).size.height * 1,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: HexColor('#FF84AF'),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text(
+                            "Summary".toUpperCase(),
+                            style: TextStyle(
+                                fontFamily: 'Gotham',
+                                color: Colors.white,
+                                fontSize: 20),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text(
+                            "The user has had an average week overall.",
+                            style: TextStyle(
+                                fontFamily: 'Gotham',
+                                color: Colors.white54,
+                                fontSize: 16),
+                          ),
+                        ),
                       ],
                     ),
                   ),
