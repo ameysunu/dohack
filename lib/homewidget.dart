@@ -1,6 +1,7 @@
 import 'package:dohack/home.dart';
 import 'package:dohack/pages/blog.dart';
 import 'package:dohack/pages/mood.dart';
+import 'package:dohack/pages/stats.dart';
 import 'package:dohack/pages/voicenote.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class _HomeWidgetState extends State<HomeWidget> {
 
   final List<Widget> _widgetOptions = [
     Home(),
+    Statistics(),
   ];
 
   Widget build(BuildContext context) {
