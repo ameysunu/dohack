@@ -19,16 +19,6 @@ class _StatisticsState extends State<Statistics> {
           automaticallyImplyLeading: false,
           elevation: 0,
           backgroundColor: HexColor('#FF84AF'),
-          actions: [
-            IconButton(
-                icon: Icon(
-                  Icons.cancel,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                })
-          ],
           bottom: TabBar(
             tabs: [
               Tab(

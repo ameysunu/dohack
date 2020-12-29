@@ -13,21 +13,23 @@ class _WeekState extends State<Week> {
       backgroundColor: HexColor('#CA82CC'),
       body: SafeArea(
         child: Container(
-          child: Column(
-            children: [
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Text(
-                    "Avicii".toUpperCase(),
-                    style: TextStyle(
-                        fontFamily: 'Gotham',
-                        color: Colors.white,
-                        fontSize: 20),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text(
+                      "Avicii".toUpperCase(),
+                      style: TextStyle(
+                          fontFamily: 'Gotham',
+                          color: Colors.white,
+                          fontSize: 20),
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
