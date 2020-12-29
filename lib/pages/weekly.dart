@@ -1,14 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
 
 class Week extends StatefulWidget {
   @override
   _WeekState createState() => _WeekState();
 }
 
+class ClicksPerYear {
+  final String year;
+  final int clicks;
+  final charts.Color color;
+
+  ClicksPerYear(this.year, this.clicks, Color color)
+      : this.color = new charts.Color(
+            r: color.red, g: color.green, b: color.blue, a: color.alpha);
+}
+
 class _WeekState extends State<Week> {
   @override
   Widget build(BuildContext context) {
+    var data = [
+      ClicksPerYear('S', 12, HexColor('#FD85B8')),
+      ClicksPerYear('M', 35, HexColor('#FF949B')),
+      ClicksPerYear('T', 42, HexColor('#FFB07D')),
+      ClicksPerYear('W', 38, HexColor('#FFD36A')),
+      ClicksPerYear('T', 42, HexColor('#8D84DD')),
+      ClicksPerYear('F', 47, HexColor('#007FA7')),
+      ClicksPerYear('S', 25, HexColor('#FF949B')),
+    ];
+
+    var series = [
+      charts.Series(
+        domainFn: (ClicksPerYear clickData, _) => clickData.year,
+        measureFn: (ClicksPerYear clickData, _) => clickData.clicks,
+        colorFn: (ClicksPerYear clickData, _) => clickData.color,
+        id: 'Clicks',
+        data: data,
+      ),
+    ];
+
+    var chart = charts.BarChart(
+      series,
+      animate: true,
+    );
+
+    var chartWidget = Padding(
+      padding: EdgeInsets.all(32.0),
+      child: SizedBox(
+        height: 200.0,
+        child: chart,
+      ),
+    );
+
     return Scaffold(
       backgroundColor: HexColor('#CA82CC'),
       body: SafeArea(
@@ -27,9 +71,7 @@ class _WeekState extends State<Week> {
                         fontSize: 20),
                   ),
                 ),
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.1,
-                ),
+                chartWidget,
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Container(
