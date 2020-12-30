@@ -26,7 +26,7 @@ class _WeekState extends State<Week> {
       ClicksPerYear('T', 42, HexColor('#FD85B8')),
       ClicksPerYear('W', 38, HexColor('#FD85B8')),
       ClicksPerYear('T', 42, HexColor('#FD85B8')),
-      ClicksPerYear('F', 47, HexColor('#FD85B8')),
+      ClicksPerYear('F', 17, HexColor('#FD85B8')),
       ClicksPerYear('S', 25, HexColor('#FD85B8')),
     ];
 
