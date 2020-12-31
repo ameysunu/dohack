@@ -1,6 +1,7 @@
 import 'package:dohack/home.dart';
 import 'package:dohack/pages/blog.dart';
 import 'package:dohack/pages/mood.dart';
+import 'package:dohack/pages/viewblog.dart';
 import 'package:dohack/stats.dart';
 import 'package:dohack/pages/voicenote.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,6 +20,7 @@ class _HomeWidgetState extends State<HomeWidget> {
   final List<Widget> _widgetOptions = [
     Home(),
     Statistics(),
+    ViewBlog(),
   ];
 
   Widget build(BuildContext context) {
