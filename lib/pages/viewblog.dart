@@ -53,18 +53,87 @@ class _ViewBlogState extends State<ViewBlog> {
                             child: Container(
                               child: Column(
                                 children: [
-                                  Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          color: Colors.blue),
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.2,
-                                      width:
-                                          MediaQuery.of(context).size.width * 1,
-                                      child: Text(
-                                          groupUsers[index].data()['time'])),
+                                  InkWell(
+                                    child: Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(15.0),
+                                            gradient: LinearGradient(colors: [
+                                              HexColor('#FFA583'),
+                                              HexColor('#EAD74F')
+                                            ])),
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.2,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                1,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(10.0),
+                                              child: Icon(
+                                                Icons.book,
+                                                color: HexColor('#7D7D7D'),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(10.0),
+                                              child: Text(
+                                                  groupUsers[index]
+                                                      .data()['time']
+                                                      .toString()
+                                                      .toUpperCase(),
+                                                  style: TextStyle(
+                                                      fontFamily: 'Gotham',
+                                                      fontSize: 16,
+                                                      color: Colors.white)),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(10.0),
+                                              child: Text(
+                                                  groupUsers[index]
+                                                      .data()['title'],
+                                                  style: TextStyle(
+                                                      fontFamily: 'Gotham',
+                                                      fontSize: 20,
+                                                      color:
+                                                          HexColor('#A8617A'))),
+                                            ),
+                                            Align(
+                                              alignment: Alignment.bottomRight,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                child: InkWell(
+                                                    child: Icon(Icons.delete,
+                                                        color: Colors.red),
+                                                    onTap: () {
+                                                      null;
+                                                    }),
+                                              ),
+                                            ),
+                                          ],
+                                        )),
+                                    onTap: () {
+                                      print("tapped");
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => DetailsPage(
+                                                  title: groupUsers[index]
+                                                      .data()['title'],
+                                                  body: groupUsers[index]
+                                                      .data()['body'],
+                                                  date: groupUsers[index]
+                                                      .data()['time'])));
+                                    },
+                                  ),
                                 ],
                               ),
                             ),
@@ -79,6 +148,74 @@ class _ViewBlogState extends State<ViewBlog> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class DetailsPage extends StatelessWidget {
+  final String title, body, date;
+  const DetailsPage({Key key, this.title, this.body, this.date})
+      : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: HexColor('#FF84AF'),
+      appBar: AppBar(
+        backgroundColor: HexColor('#FF84AF'),
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.cancel),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          )
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Center(
+                    child: Text(
+                  date.toUpperCase(),
+                  style: TextStyle(
+                      fontFamily: 'Gotham', fontSize: 17, color: Colors.white),
+                )),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  title,
+                  style: TextStyle(
+                      fontFamily: 'Gotham', fontSize: 30, color: Colors.white),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  body,
+                  style: TextStyle(
+                      fontFamily: 'Gotham',
+                      fontSize: 20,
+                      color: HexColor('#A8617A')),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+      // floatingActionButton: FloatingActionButton(
+      //   backgroundColor: HexColor('#7E85D5'),
+      //   child: Icon(Icons.edit),
+      //   onPressed: () {
+      //     print("Edit triggered");
+      //   },
+      // ),
     );
   }
 }
