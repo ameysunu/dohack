@@ -243,12 +243,7 @@ class _RecognizeContent extends StatelessWidget {
 }
 
 void newVoice() async {
-  firestoreInstance
-      .collection('blog')
-      .doc('voicenote')
-      .collection('voice')
-      .doc('${now.day}${now.month}${now.year}')
-      .set({
+  firestoreInstance.collection('voice').doc('voicenote').set({
     "voice": _RecognizeContent().text,
     "time": "$newDate",
   }).then((_) {

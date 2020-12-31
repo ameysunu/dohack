@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:share/share.dart';
 
 final firestoreInstance = FirebaseFirestore.instance;
 AsyncSnapshot<DocumentSnapshot> snapshot;
@@ -173,87 +175,105 @@ class DetailsPage extends StatelessWidget {
           )
         ],
       ),
-      body: Container(
-        child: Column(
-          children: [
-            SingleChildScrollView(
+      body: Column(
+        children: [
+          SingleChildScrollView(
+            child: Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Center(
+                        child: Text(
+                      date.toUpperCase(),
+                      style: TextStyle(
+                          fontFamily: 'Gotham',
+                          fontSize: 17,
+                          color: Colors.white),
+                    )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text(
+                      title,
+                      style: TextStyle(
+                          fontFamily: 'Gotham',
+                          fontSize: 30,
+                          color: Colors.white),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text(
+                      body,
+                      style: TextStyle(
+                          fontFamily: 'Gotham',
+                          fontSize: 20,
+                          color: HexColor('#A8617A')),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+          Spacer(),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(10.0, 10, 10, 20),
               child: Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                height: 70,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.white,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Center(
-                          child: Text(
-                        date.toUpperCase(),
-                        style: TextStyle(
-                            fontFamily: 'Gotham',
-                            fontSize: 17,
-                            color: Colors.white),
-                      )),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Text(
-                        title,
-                        style: TextStyle(
-                            fontFamily: 'Gotham',
-                            fontSize: 30,
-                            color: Colors.white),
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.edit,
+                          color: HexColor('#A8617A'),
+                        ),
+                        onPressed: () {
+                          null;
+                        },
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text(
-                        body,
-                        style: TextStyle(
-                            fontFamily: 'Gotham',
-                            fontSize: 20,
-                            color: HexColor('#A8617A')),
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.share,
+                          color: HexColor('#A8617A'),
+                        ),
+                        onPressed: () {
+                          Share.share('Check out my Blog',
+                              subject: 'Here\'s my blog');
+                        },
                       ),
-                    )
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.copy,
+                          color: HexColor('#A8617A'),
+                        ),
+                        onPressed: () {
+                          Clipboard.setData(new ClipboardData(text: body));
+                        },
+                      ),
+                    ),
                   ],
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  height: 70,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Colors.white,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: IconButton(
-                          icon: Icon(Icons.edit),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: IconButton(
-                          icon: Icon(Icons.share),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: IconButton(
-                          icon: Icon(Icons.copy),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
       // floatingActionButton: FloatingActionButton(
       //   backgroundColor: HexColor('#7E85D5'),
