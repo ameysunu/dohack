@@ -30,7 +30,6 @@
 .pub-cache/
 .pub/
 /build/
-/android/app/google-services.json
 /assets/test_service_account.json
 
 # Web related
