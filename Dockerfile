@@ -24,6 +24,8 @@ ENV PATH "$PATH:/home/developer/Android/sdk/platform-tools"
 # Download Flutter SDK
 RUN git clone https://github.com/flutter/flutter.git
 ENV PATH "$PATH:/home/developer/flutter/bin"
+RUN flutter channel dev
+RUN flutter upgrade
 
 # Run basic check to download Dark SDK
 RUN flutter doctor
