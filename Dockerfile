@@ -32,5 +32,6 @@ RUN flutter doctor
 
 # Run app
 RUN git clone https://github.com/ameysunu/dohack 
+RUN ls
 # RUN mv dohacks home/developer/dohacks
 RUN flutter build apk
