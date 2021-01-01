@@ -1,64 +1,60 @@
-FROM ubuntu:20.04
+FROM debian:stretch
 
-ENV UID=1000
-ENV GID=1000
-ENV USER="developer"
-ENV JAVA_VERSION="8"
-ENV ANDROID_TOOLS_URL="https://dl.google.com/android/repository/commandlinetools-linux-6609375_latest.zip"
+ENV FLUTTER_VERSION="0.0.10"
 ENV ANDROID_VERSION="29"
-ENV ANDROID_BUILD_TOOLS_VERSION="29.0.3"
-ENV ANDROID_ARCHITECTURE="x86_64"
-ENV ANDROID_SDK_ROOT="/home/$USER/android"
-ENV FLUTTER_CHANNEL="stable"
-ENV FLUTTER_VERSION="1.22.4"
-ENV FLUTTER_URL="https://storage.googleapis.com/flutter_infra/releases/$FLUTTER_CHANNEL/linux/flutter_linux_$FLUTTER_VERSION-$FLUTTER_CHANNEL.tar.xz"
-ENV FLUTTER_HOME="/home/$USER/flutter"
-ENV FLUTTER_WEB_PORT="8090"
-ENV FLUTTER_DEBUG_PORT="42000"
-ENV FLUTTER_EMULATOR_NAME="flutter_emulator"
-ENV PATH="$ANDROID_SDK_ROOT/cmdline-tools/tools/bin:$ANDROID_SDK_ROOT/emulator:$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/platforms:$FLUTTER_HOME/bin:$PATH"
 
-# install all dependencies
-ENV DEBIAN_FRONTEND="noninteractive"
-RUN apt-get update \
-  && apt-get install --yes --no-install-recommends openjdk-$JAVA_VERSION-jdk curl unzip sed git bash xz-utils libglvnd0 ssh xauth x11-xserver-utils libpulse0 libxcomposite1 libgl1-mesa-glx \
-  && rm -rf /var/lib/{apt,dpkg,cache,log}
+# image mostly inspired from https://github.com/GoogleCloudPlatform/cloud-builders-community/blob/770e0e9/flutter/Dockerfile
 
-# create user
-RUN groupadd --gid $GID $USER \
-  && useradd -s /bin/bash --uid $UID --gid $GID -m $USER
+LABEL com.gableroux.flutter.name="debian linux image for Flutter" \
+      com.gableroux.flutter.license="MIT" \
+      com.gableroux.flutter.vcs-type="git" \
+      com.gableroux.flutter.vcs-url="https://github.com/gableroux/docker-flutter"
 
-USER $USER
-WORKDIR /home/$USER
+WORKDIR /
 
-# android sdk
-RUN mkdir -p $ANDROID_SDK_ROOT \
-  && mkdir -p /home/$USER/.android \
-  && touch /home/$USER/.android/repositories.cfg \
-  && curl -o android_tools.zip $ANDROID_TOOLS_URL \
-  && unzip -qq -d "$ANDROID_SDK_ROOT" android_tools.zip \
-  && rm android_tools.zip \
-  && mkdir -p $ANDROID_SDK_ROOT/cmdline-tools \
-  && mv $ANDROID_SDK_ROOT/tools $ANDROID_SDK_ROOT/cmdline-tools/tools \
-  && yes "y" | sdkmanager "build-tools;$ANDROID_BUILD_TOOLS_VERSION" \
-  && yes "y" | sdkmanager "platforms;android-$ANDROID_VERSION" \
-  && yes "y" | sdkmanager "platform-tools" \
-  && yes "y" | sdkmanager "emulator" \
-  && yes "y" | sdkmanager "system-images;android-$ANDROID_VERSION;google_apis_playstore;$ANDROID_ARCHITECTURE"
+RUN apt update -y
+RUN apt install -y \
+  git \
+  wget \
+  curl \
+  unzip \
+  lcov \
+  lib32stdc++6 \
+  libglu1-mesa \
+  default-jdk-headless
 
-# flutter
-RUN curl -o flutter.tar.xz $FLUTTER_URL \
-  && mkdir -p $FLUTTER_HOME \
-  && tar xf flutter.tar.xz -C /home/$USER \
-  && rm flutter.tar.xz \
-  && flutter config --no-analytics \
-  && flutter precache \
-  && yes "y" | flutter doctor --android-licenses \
-  && flutter doctor \
-  && flutter emulators --create \
-  && flutter update-packages
+# Install the Android SDK Dependency.
+ENV ANDROID_SDK_URL="https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip"
+ENV ANDROID_TOOLS_ROOT="/opt/android_sdk"
+RUN mkdir -p "${ANDROID_TOOLS_ROOT}"
+ENV ANDROID_SDK_ARCHIVE="${ANDROID_TOOLS_ROOT}/archive"
+RUN wget -q "${ANDROID_SDK_URL}" -O "${ANDROID_SDK_ARCHIVE}"
+RUN unzip -q -d "${ANDROID_TOOLS_ROOT}" "${ANDROID_SDK_ARCHIVE}"
+RUN yes "y" | "${ANDROID_TOOLS_ROOT}/tools/bin/sdkmanager" "build-tools;$ANDROID_VERSION.0.0"
+RUN yes "y" | "${ANDROID_TOOLS_ROOT}/tools/bin/sdkmanager" "platforms;android-$ANDROID_VERSION"
+RUN yes "y" | "${ANDROID_TOOLS_ROOT}/tools/bin/sdkmanager" "platform-tools"
+RUN rm "${ANDROID_SDK_ARCHIVE}"
+ENV PATH="${ANDROID_TOOLS_ROOT}/tools:${PATH}"
+ENV PATH="${ANDROID_TOOLS_ROOT}/tools/bin:${PATH}"
 
-COPY entrypoint.sh /usr/local/bin/
-COPY chown.sh /usr/local/bin/
-COPY flutter-android-emulator.sh /usr/local/bin/flutter-android-emulator
-ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
+# Install Flutter.
+ENV FLUTTER_ROOT="/opt/flutter"
+RUN git clone --branch $FLUTTER_VERSION --depth=1 https://github.com/flutter/flutter "${FLUTTER_ROOT}"
+ENV PATH="${FLUTTER_ROOT}/bin:${PATH}"
+ENV ANDROID_HOME="${ANDROID_TOOLS_ROOT}"
+
+# Disable analytics and crash reporting on the builder.
+RUN flutter config  --no-analytics
+
+# Perform an artifact precache so that no extra assets need to be downloaded on demand.
+RUN flutter precache
+
+# Accept licenses.
+RUN yes "y" | flutter doctor --android-licenses
+
+# Perform a doctor run.
+RUN flutter doctor -v
+
+ENV PATH $PATH:/flutter/bin/cache/dart-sdk/bin:/flutter/bin
+
+CMD ['ansible']
