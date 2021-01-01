@@ -1,6 +1,7 @@
 import 'package:dohack/home.dart';
 import 'package:dohack/pages/blog.dart';
 import 'package:dohack/pages/mood.dart';
+import 'package:dohack/user.dart';
 import 'package:dohack/pages/viewblog.dart';
 import 'package:dohack/stats.dart';
 import 'package:dohack/pages/voicenote.dart';
@@ -21,6 +22,7 @@ class _HomeWidgetState extends State<HomeWidget> {
     Home(),
     Statistics(),
     ViewBlog(),
+    User(),
   ];
 
   Widget build(BuildContext context) {
