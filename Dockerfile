@@ -31,7 +31,4 @@ RUN flutter upgrade
 RUN flutter doctor
 
 # Run app
-RUN git clone https://github.com/ameysunu/dohack 
-RUN ls
-# RUN mv dohacks home/developer/dohacks
-RUN cd dohacks && flutter build apk
+RUN git clone https://github.com/ameysunu/dohack && flutter build apk
