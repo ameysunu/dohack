@@ -19,5 +19,6 @@ RUN flutter upgrade
 RUN flutter doctor
 
 FROM caddy:2.1.1-alpine
-EXPOSE 80
+EXPOSE 80:80
+EXPOSE 443:443
 CMD ["caddy","file-server","--browse"]
