@@ -20,7 +20,7 @@ RUN flutter doctor
 
 FROM caddy:2.1.1-alpine
 # Install Nginx
-FROM nginx:1.9.6-alpine
+FROM nginx:1.19.6-alpine
 # Expose ports
 EXPOSE 80
 
