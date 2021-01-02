@@ -20,8 +20,5 @@ RUN flutter doctor
 
 FROM caddy:2.1.1-alpine
 EXPOSE 80:80
-VOLUME ./Caddyfile:/etc/Caddyfile
-VOLUME ./config:/config
-VOLUME ./data:/data
 
 CMD ["caddy","file-server","--browse"]
