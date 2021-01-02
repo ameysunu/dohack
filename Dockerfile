@@ -32,7 +32,7 @@ RUN flutter doctor
 
 # Run app
 RUN git clone https://github.com/ameysunu/dohack 
-RUN cd dohack && flutter build apk
+RUN cd dohack && flutter test
 
 # Caddy build
 FROM alpine:3.12
