@@ -19,12 +19,5 @@ RUN flutter upgrade
 RUN flutter doctor
 
 FROM caddy:2.1.1-alpine
-# Install Nginx
-FROM nginx:1.19.6-alpine
-# Expose ports
 EXPOSE 80
-
-# Set the default command to execute
-# when creating a new container
-
-CMD ["nginx","-g", "daemon off;","caddy","file-server","--browse"]
+CMD ["caddy","file-server","--browse"]
