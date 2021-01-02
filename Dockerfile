@@ -20,4 +20,4 @@ RUN flutter doctor
 
 FROM caddy:2.1.1-alpine
 EXPOSE 80:80
-CMD ["caddy","file-server","--browse"]
+CMD ["caddy","/etc/caddy/Caddyfile","file-server","--browse"]
