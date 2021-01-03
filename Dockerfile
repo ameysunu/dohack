@@ -19,6 +19,6 @@ RUN flutter upgrade
 RUN flutter doctor
 
 FROM caddy:2.1.1-alpine
-COPY --from=builder ./var/lib/apk .
+COPY --from=builder ./kaniko/0/ .
 EXPOSE 80
 CMD ["caddy","file-server","--browse"]
