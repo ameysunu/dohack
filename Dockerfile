@@ -17,6 +17,8 @@ ENV PATH "$PATH:/home/developer/flutter/bin"
 RUN flutter channel dev
 RUN flutter upgrade
 RUN flutter doctor
+RUN git clone https://github.com/ameysunu/dohack
+RUN cd dohack && flutter test
 
 FROM caddy:2.1.1-alpine
 COPY --from=builder /home/developer/ .
