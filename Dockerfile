@@ -19,6 +19,7 @@ RUN flutter upgrade
 RUN flutter doctor
 
 FROM caddy:2.1.1-alpine
-COPY --from=builder ./kaniko/0/ .
+RUN git clone https://github.com/ameysunu/dohack
+COPY --from=builder ./dohack/app-release.apk .
 EXPOSE 80
 CMD ["caddy","file-server","--browse"]
