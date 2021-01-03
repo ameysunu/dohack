@@ -20,6 +20,6 @@ RUN flutter doctor
 
 FROM caddy:2.1.1-alpine
 RUN ls
-COPY --from=builder /kaniko/0/ .
+COPY --from=builder . .
 EXPOSE 80
 CMD ["caddy","file-server","--browse"]
