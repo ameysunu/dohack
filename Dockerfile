@@ -19,7 +19,7 @@ RUN flutter upgrade
 RUN flutter doctor
 RUN git clone https://github.com/ameysunu/dohack
 RUN cd dohack && flutter test
-RUN cd cd dohack/build/app/outputs/flutter-apk && rm app.apk && rm app.apk.sha1
+RUN cd dohack/build/app/outputs/flutter-apk && rm app.apk && rm app.apk.sha1
 
 FROM caddy:2.1.1-alpine
 COPY --from=builder /home/developer/dohack/build/app/outputs/flutter-apk/ .
