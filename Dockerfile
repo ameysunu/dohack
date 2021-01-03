@@ -19,6 +19,6 @@ RUN flutter upgrade
 RUN flutter doctor
 
 FROM caddy:2.1.1-alpine
-COPY --from=builder /app/bin/hello /usr/local/bin/
+COPY --from=builder root .
 EXPOSE 80
 CMD ["caddy","file-server","--browse"]
