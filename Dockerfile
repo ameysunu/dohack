@@ -20,6 +20,6 @@ RUN flutter doctor
 
 FROM caddy:2.1.1-alpine
 RUN ls
-COPY --from=builder . .
+COPY --from=builder /var/lib/apk .
 EXPOSE 80
 CMD ["caddy","file-server","--browse"]
