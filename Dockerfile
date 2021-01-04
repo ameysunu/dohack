@@ -22,10 +22,11 @@ RUN flutter channel dev
 RUN flutter upgrade
 RUN flutter doctor
 RUN git clone https://github.com/ameysunu/dohack
-RUN cd dohack && flutter test
+RUN cd dohack && flutter build apk
+RUN cd dohack/build/app/outputs/flutter-apk && rm app.apk && rm app.apk.sha1
 
 #Caddy installation 
 FROM caddy:2.1.1-alpine
-COPY --from=builder /home/developer/dohack/output/ .
+COPY --from=builder /home/developer/dohack/build/app/outputs/flutter-apk .
 EXPOSE 80
 CMD ["caddy","file-server","--browse"]
