@@ -46,7 +46,7 @@ class _VoiceState extends State<Voice> {
 
     responseStream.listen((data) {
       setState(() {
-        text =
+        voiceController.text =
             data.results.map((e) => e.alternatives.first.transcript).join('\n');
         recognizeFinished = true;
       });
@@ -129,7 +129,7 @@ class _VoiceState extends State<Voice> {
               ),
               if (recognizeFinished)
                 _RecognizeContent(
-                  text: text,
+                  text: voiceController.text,
                 ),
               Spacer(),
               Align(
@@ -174,6 +174,24 @@ class _RecognizeContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        // Padding(
+        //   padding: const EdgeInsets.all(10.0),
+        //   child: Container(
+        //     height: MediaQuery.of(context).size.height * 0.4,
+        //     width: MediaQuery.of(context).size.width * 1,
+        //     decoration: BoxDecoration(
+        //       borderRadius: BorderRadius.circular(15),
+        //       color: HexColor('#DC7196'),
+        //     ),
+        //     child: Padding(
+        //       padding: const EdgeInsets.all(10.0),
+        //       child: Text(
+        //         text,
+        //         style: TextStyle(fontFamily: 'Gotham', color: Colors.black54),
+        //       ),
+        //     ),
+        //   ),
+        // ),
         Padding(
           padding: const EdgeInsets.fromLTRB(10.0, 20, 10, 10),
           child: Container(
@@ -203,7 +221,7 @@ class _RecognizeContent extends StatelessWidget {
                     ),
                     labelStyle:
                         TextStyle(fontFamily: 'Gotham', color: Colors.white),
-                    hintText: text,
+                    // hintText: "Sup dawg",
                   ),
                 ),
               ),
@@ -243,8 +261,11 @@ class _RecognizeContent extends StatelessWidget {
 }
 
 void newVoice() async {
-  firestoreInstance.collection('voice').doc('voicenote').set({
-    "voice": _RecognizeContent().text,
+  firestoreInstance
+      .collection('voice')
+      .doc('${now.day}${now.month}${now.year}')
+      .set({
+    "voice": voiceController.text,
     "time": "$newDate",
   }).then((_) {
     print("success!");
