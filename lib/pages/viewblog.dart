@@ -34,6 +34,16 @@ class _ViewBlogState extends State<ViewBlog> {
           'Blogs'.toUpperCase(),
           style: TextStyle(fontFamily: "Gotham", color: HexColor('#FF84AF')),
         ),
+        actions: [
+          IconButton(
+              icon: Icon(
+                Icons.fire_extinguisher,
+                color: HexColor('#FF84AF'),
+              ),
+              onPressed: () {
+                print("Summertime Sadness");
+              })
+        ],
       ),
       body: Container(
         child: Container(
