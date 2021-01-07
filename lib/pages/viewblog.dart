@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dohack/pages/viewvoice.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -28,6 +29,7 @@ class _ViewBlogState extends State<ViewBlog> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         elevation: 0,
         title: Text(
@@ -41,7 +43,13 @@ class _ViewBlogState extends State<ViewBlog> {
                 color: HexColor('#FF84AF'),
               ),
               onPressed: () {
-                print("Summertime Sadness");
+                Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return ViewVoice();
+                            },
+                          ),
+                        );
               })
         ],
       ),

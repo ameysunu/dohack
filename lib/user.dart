@@ -15,17 +15,6 @@ class _UserState extends State<User> {
       appBar: AppBar(
         backgroundColor: HexColor('#FFE3F2'),
         elevation: 0,
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.settings,
-              color: HexColor('#7D7D7D'),
-            ),
-            onPressed: () {
-              null;
-            },
-          )
-        ],
       ),
       body: SafeArea(
         child: SingleChildScrollView(
