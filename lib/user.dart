@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'login.dart';
 
 class User extends StatefulWidget {
@@ -105,41 +106,46 @@ class _UserState extends State<User> {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Container(
-                        height: MediaQuery.of(context).size.height * 0.25,
-                        width: MediaQuery.of(context).size.width * 0.42,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            gradient: LinearGradient(colors: [
-                              HexColor('#CA82CC'),
-                              HexColor('#FF84AF')
-                            ])),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            IconButton(
-                              icon: Icon(
-                                Icons.error,
-                                color: HexColor('#A8617A'),
-                              ),
-                              onPressed: () {
-                                null;
-                              },
-                            ),
-                            Spacer(),
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Text(
-                                "Report an issue",
-                                style: TextStyle(
-                                  fontFamily: 'Gotham',
-                                  color: HexColor('#FFFFFF'),
-                                  fontSize: 17,
+                      child: InkWell(
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * 0.25,
+                          width: MediaQuery.of(context).size.width * 0.42,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              gradient: LinearGradient(colors: [
+                                HexColor('#CA82CC'),
+                                HexColor('#FF84AF')
+                              ])),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              IconButton(
+                                icon: Icon(
+                                  Icons.error,
+                                  color: HexColor('#A8617A'),
                                 ),
+                                onPressed: () {
+                                  null;
+                                },
                               ),
-                            )
-                          ],
+                              Spacer(),
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Text(
+                                  "Report an issue",
+                                  style: TextStyle(
+                                    fontFamily: 'Gotham',
+                                    color: HexColor('#FFFFFF'),
+                                    fontSize: 17,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
+                        onTap: () {
+                          _issueURL();
+                        },
                       ),
                     ),
                   ],
@@ -147,53 +153,58 @@ class _UserState extends State<User> {
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(20.0, 10, 20, 10),
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.23,
-                  width: MediaQuery.of(context).size.width * 0.95,
+                child: InkWell(
                   child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
-                        gradient: LinearGradient(colors: [
-                          HexColor('#FFA583'),
-                          HexColor('#EAD74F')
-                        ])),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Icon(
-                            Icons.compass_calibration,
-                            color: HexColor('#7D7D7D'),
-                          ),
-                        ),
-                        Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Text(
-                                "Developer".toUpperCase(),
-                                style: TextStyle(
-                                    fontFamily: 'Gotham',
-                                    color: Colors.white,
-                                    fontSize: 20),
-                              ),
+                    height: MediaQuery.of(context).size.height * 0.23,
+                    width: MediaQuery.of(context).size.width * 0.95,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.0),
+                          gradient: LinearGradient(colors: [
+                            HexColor('#FFA583'),
+                            HexColor('#EAD74F')
+                          ])),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Icon(
+                              Icons.compass_calibration,
+                              color: HexColor('#7D7D7D'),
                             ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Text(
-                            "Meet the developers of Alleviate.",
-                            style: TextStyle(
-                                fontFamily: 'Gotham',
-                                color: HexColor('#A8617A'),
-                                fontSize: 15),
                           ),
-                        ),
-                      ],
+                          Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Text(
+                                  "Developer".toUpperCase(),
+                                  style: TextStyle(
+                                      fontFamily: 'Gotham',
+                                      color: Colors.white,
+                                      fontSize: 20),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(
+                              "Meet the developers of Alleviate.",
+                              style: TextStyle(
+                                  fontFamily: 'Gotham',
+                                  color: HexColor('#A8617A'),
+                                  fontSize: 15),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
+                  onTap: () {
+                    developerURL();
+                  },
                 ),
               ),
               Align(
@@ -238,5 +249,23 @@ class _UserState extends State<User> {
         ),
       ),
     );
+  }
+}
+
+_issueURL() async {
+  const url = 'https://github.com/ameysunu/dohack/issues';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+
+developerURL() async {
+  const url = 'https://github.com/ameysunu';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }
