@@ -26,14 +26,14 @@ class _ViewVoiceState extends State<ViewVoice> {
     var _width = (_screenWidth - 20) / 2;
     var _aspectRatio = _width / 250;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: HexColor('#CA82CC'),
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
+        backgroundColor: HexColor('#CA82CC'),
         elevation: 0,
         title: Text(
           'Voice Notes'.toUpperCase(),
-          style: TextStyle(fontFamily: "Gotham", color: HexColor('#FF84AF')),
+          style: TextStyle(fontFamily: "Gotham", color: HexColor('#FFE7FF')),
         ),
         actions: [
           IconButton(
@@ -70,7 +70,7 @@ class _ViewVoiceState extends State<ViewVoice> {
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(15.0),
-                                          color: HexColor('#FF84AF')),
+                                          color: HexColor('#FF949B')),
                                       height:
                                           MediaQuery.of(context).size.height *
                                               0.175,
@@ -101,7 +101,7 @@ class _ViewVoiceState extends State<ViewVoice> {
                                                     fontFamily: 'Gotham',
                                                     fontSize: 15,
                                                     color:
-                                                        HexColor('#A8617A'))),
+                                                        HexColor('#726993'))),
                                           ),
                                           Align(
                                             alignment: Alignment.bottomRight,
