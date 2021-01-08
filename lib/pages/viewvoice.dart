@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:share/share.dart';
 
 final firestoreInstance = FirebaseFirestore.instance;
 AsyncSnapshot<DocumentSnapshot> snapshot;
@@ -63,63 +62,90 @@ class _ViewVoiceState extends State<ViewVoice> {
                         return SingleChildScrollView(
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
-                            child: Container(
-                              child: Column(
-                                children: [
-                                  Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(15.0),
-                                          color: HexColor('#FF949B')),
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.175,
-                                      width:
-                                          MediaQuery.of(context).size.width * 1,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.all(10.0),
-                                            child: Text(
-                                                groupUsers[index]
-                                                    .data()['time']
-                                                    .toString()
-                                                    .toUpperCase(),
-                                                style: TextStyle(
-                                                    fontFamily: 'Gotham',
-                                                    fontSize: 16,
-                                                    color: Colors.white)),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(10.0),
-                                            child: Text(
-                                                groupUsers[index]
-                                                    .data()['voice'],
-                                                style: TextStyle(
-                                                    fontFamily: 'Gotham',
-                                                    fontSize: 15,
-                                                    color:
-                                                        HexColor('#726993'))),
-                                          ),
-                                          Align(
-                                            alignment: Alignment.bottomRight,
-                                            child: Padding(
+                            child: Slidable(
+                              actionPane: SlidableDrawerActionPane(),
+                              actionExtentRatio: 0.25,
+                              child: Container(
+                                child: Column(
+                                  children: [
+                                    Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(15.0),
+                                            color: HexColor('#FF949B')),
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.175,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                1,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
                                               padding:
                                                   const EdgeInsets.all(10.0),
-                                              child: InkWell(
-                                                  child: Icon(Icons.delete,
-                                                      color: Colors.red),
-                                                  onTap: () {
-                                                    null;
-                                                  }),
+                                              child: Text(
+                                                  groupUsers[index]
+                                                      .data()['time']
+                                                      .toString()
+                                                      .toUpperCase(),
+                                                  style: TextStyle(
+                                                      fontFamily: 'Gotham',
+                                                      fontSize: 16,
+                                                      color: Colors.white)),
                                             ),
-                                          ),
-                                        ],
-                                      )),
-                                ],
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(10.0),
+                                              child: Text(
+                                                  groupUsers[index]
+                                                      .data()['voice'],
+                                                  style: TextStyle(
+                                                      fontFamily: 'Gotham',
+                                                      fontSize: 15,
+                                                      color:
+                                                          HexColor('#726993'))),
+                                            ),
+                                          ],
+                                        )),
+                                  ],
+                                ),
                               ),
+                              secondaryActions: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15.0),
+                                      color: HexColor('#FF0D0D'),
+                                    ),
+                                    child: Container(
+                                      child: IconButton(
+                                        icon: Icon(Icons.delete,
+                                            color: Colors.white),
+                                        onPressed: () {
+                                          print("Delete triggered");
+                                          firestoreInstance
+                                              .collection('voice')
+                                              .doc(groupUsers[index]
+                                                  .data()['id'])
+                                              .delete()
+                                              .then((_) {
+                                            print("success!");
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                    // child: IconSlideAction(
+                                    //   caption: 'Edit',
+                                    //   icon: Icons.edit,
+                                    //   onTap: () => print("more"),
+                                    // ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         );
