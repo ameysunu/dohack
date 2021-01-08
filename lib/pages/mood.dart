@@ -1,3 +1,4 @@
+import 'package:dohack/home.dart';
 import 'package:dohack/homewidget.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -306,6 +307,8 @@ void newMood() async {
     "mood": dropdownValue,
     "mood_summary": descriptionController.text,
     "time": "$newDate",
+    "newTime": "$time:$min",
+    "id": '${now.day}${now.month}${now.year}',
   }).then((_) {
     print("success!");
   });
