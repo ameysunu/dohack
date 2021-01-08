@@ -97,7 +97,7 @@ class _WeekState extends State<Week> {
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Text(
-                            "20 DEC - 27 DEC".toUpperCase(),
+                            "3 JAN - 9 JAN".toUpperCase(),
                             style: TextStyle(
                                 fontFamily: 'Gotham',
                                 fontSize: 15,

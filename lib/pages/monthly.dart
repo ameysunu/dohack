@@ -60,7 +60,7 @@ class _MonthState extends State<Month> {
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Text(
-                    "December",
+                    "January",
                     style: TextStyle(
                         fontFamily: 'Gotham',
                         color: Colors.white,
@@ -118,7 +118,7 @@ class _MonthState extends State<Month> {
                       children: [
                         Center(
                             child: Text(
-                          "11",
+                          "2",
                           style: TextStyle(fontFamily: 'Gotham', fontSize: 50),
                         )),
                         Padding(
