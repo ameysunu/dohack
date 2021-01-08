@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dohack/pages/viewvoice.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:share/share.dart';
 
@@ -44,12 +45,12 @@ class _ViewBlogState extends State<ViewBlog> {
               ),
               onPressed: () {
                 Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return ViewVoice();
-                            },
-                          ),
-                        );
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return ViewVoice();
+                    },
+                  ),
+                );
               })
         ],
       ),
@@ -70,92 +71,114 @@ class _ViewBlogState extends State<ViewBlog> {
                         return SingleChildScrollView(
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
-                            child: Container(
-                              child: Column(
-                                children: [
-                                  InkWell(
-                                    child: Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(15.0),
-                                            gradient: LinearGradient(colors: [
-                                              HexColor('#FFA583'),
-                                              HexColor('#EAD74F')
-                                            ])),
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.2,
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                1,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(10.0),
-                                              child: Icon(
-                                                Icons.book,
-                                                color: HexColor('#7D7D7D'),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(10.0),
-                                              child: Text(
-                                                  groupUsers[index]
-                                                      .data()['time']
-                                                      .toString()
-                                                      .toUpperCase(),
-                                                  style: TextStyle(
-                                                      fontFamily: 'Gotham',
-                                                      fontSize: 16,
-                                                      color: Colors.white)),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(10.0),
-                                              child: Text(
-                                                  groupUsers[index]
-                                                      .data()['title'],
-                                                  style: TextStyle(
-                                                      fontFamily: 'Gotham',
-                                                      fontSize: 20,
-                                                      color:
-                                                          HexColor('#A8617A'))),
-                                            ),
-                                            Align(
-                                              alignment: Alignment.bottomRight,
-                                              child: Padding(
+                            child: Slidable(
+                              actionPane: SlidableDrawerActionPane(),
+                              actionExtentRatio: 0.25,
+                              child: Container(
+                                child: Column(
+                                  children: [
+                                    InkWell(
+                                      child: Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(15.0),
+                                              gradient: LinearGradient(colors: [
+                                                HexColor('#FFA583'),
+                                                HexColor('#EAD74F')
+                                              ])),
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.2,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              1,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
                                                 padding:
                                                     const EdgeInsets.all(10.0),
-                                                child: InkWell(
-                                                    child: Icon(Icons.delete,
-                                                        color: Colors.red),
-                                                    onTap: () {
-                                                      null;
-                                                    }),
+                                                child: Icon(
+                                                  Icons.book,
+                                                  color: HexColor('#7D7D7D'),
+                                                ),
                                               ),
-                                            ),
-                                          ],
-                                        )),
-                                    onTap: () {
-                                      print("tapped");
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => DetailsPage(
-                                                  title: groupUsers[index]
-                                                      .data()['title'],
-                                                  body: groupUsers[index]
-                                                      .data()['body'],
-                                                  date: groupUsers[index]
-                                                      .data()['time'])));
-                                    },
-                                  ),
-                                ],
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                child: Text(
+                                                    groupUsers[index]
+                                                        .data()['time']
+                                                        .toString()
+                                                        .toUpperCase(),
+                                                    style: TextStyle(
+                                                        fontFamily: 'Gotham',
+                                                        fontSize: 16,
+                                                        color: Colors.white)),
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                child: Text(
+                                                    groupUsers[index]
+                                                        .data()['title'],
+                                                    style: TextStyle(
+                                                        fontFamily: 'Gotham',
+                                                        fontSize: 20,
+                                                        color: HexColor(
+                                                            '#A8617A'))),
+                                              ),
+                                            ],
+                                          )),
+                                      onTap: () {
+                                        print("tapped");
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DetailsPage(
+                                                        title: groupUsers[index]
+                                                            .data()['title'],
+                                                        body: groupUsers[index]
+                                                            .data()['body'],
+                                                        date: groupUsers[index]
+                                                            .data()['time'])));
+                                      },
+                                    ),
+                                  ],
+                                ),
                               ),
+                              secondaryActions: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15.0),
+                                      color: HexColor('#FF0D0D'),
+                                    ),
+                                    child: Container(
+                                      child: IconButton(
+                                        icon: Icon(Icons.delete,
+                                            color: Colors.white),
+                                        onPressed: () {
+                                          print("Delete triggered");
+                                          firestoreInstance
+                                              .collection('blog')
+                                              .doc(groupUsers[index]
+                                                  .data()['id'])
+                                              .delete()
+                                              .then((_) {
+                                            print("success!");
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         );

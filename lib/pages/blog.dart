@@ -173,6 +173,7 @@ void newRecord() async {
       .set({
     "title": titleController.text,
     "body": bodyController.text,
+    "id": '${now.day}${now.month}${now.year}',
     "time": "$newDate",
   }).then((_) {
     print("success!");

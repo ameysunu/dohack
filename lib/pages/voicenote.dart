@@ -266,6 +266,7 @@ void newVoice() async {
       .doc('${now.day}${now.month}${now.year}')
       .set({
     "voice": voiceController.text,
+    "id": '${now.day}${now.month}${now.year}',
     "time": "$newDate",
   }).then((_) {
     print("success!");
