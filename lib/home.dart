@@ -69,7 +69,7 @@ class _HomeState extends State<Home> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15.0),
                       gradient: LinearGradient(
-                          colors: [HexColor('#FF84AF'), HexColor('#CA82CC')])),
+                          colors: [HexColor('#FF84AF'), HexColor('#FFA583')])),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -109,6 +109,19 @@ class _HomeState extends State<Home> {
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.045,
+                child: Text(
+                  "Daily Mood".toUpperCase(),
+                  style: TextStyle(
+                      color: HexColor('#A8617A'),
+                      fontSize: 20,
+                      fontFamily: 'Gotham'),
+                ),
+              ),
+            ),
             Container(
               child: StreamBuilder(
                 stream: mainStream,
@@ -131,7 +144,21 @@ class _HomeState extends State<Home> {
                                   actionExtentRatio: 0.25,
                                   child: Container(
                                     child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: Text(
+                                              groupUsers[index]
+                                                  .data()['time']
+                                                  .toString()
+                                                  .toUpperCase(),
+                                              style: TextStyle(
+                                                  fontFamily: 'Gotham',
+                                                  fontSize: 16,
+                                                  color: Colors.grey)),
+                                        ),
                                         Container(
                                             decoration: BoxDecoration(
                                               borderRadius:
@@ -155,23 +182,10 @@ class _HomeState extends State<Home> {
                                                       10.0),
                                                   child: Text(
                                                       groupUsers[index]
-                                                          .data()['time']
-                                                          .toString()
-                                                          .toUpperCase(),
-                                                      style: TextStyle(
-                                                          fontFamily: 'Gotham',
-                                                          fontSize: 16,
-                                                          color: Colors.grey)),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      10.0),
-                                                  child: Text(
-                                                      groupUsers[index]
                                                           .data()['mood'],
                                                       style: TextStyle(
                                                           fontFamily: 'Gotham',
-                                                          fontSize: 17,
+                                                          fontSize: 20,
                                                           color: HexColor(
                                                               '#000000'))),
                                                 ),
