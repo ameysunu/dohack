@@ -1,5 +1,6 @@
 spec:
   name: dohack
+  type: NodePort
   ports:
   - name: "80"
     port: 80
