@@ -3,6 +3,6 @@ spec:
   services:
   - dockerfile_path: Dockerfile
     git:
-      branch: main
+      branch: master
       repo_clone_url: https://github.com/ameysunu/dohack.git
     name: dohack-dockerfile
