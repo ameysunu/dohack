@@ -6,3 +6,5 @@ spec:
       branch: master
       repo_clone_url: https://github.com/ameysunu/dohack.git
     name: dohack-dockerfile
+  ports:
+    port: 80
