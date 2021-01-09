@@ -2,3 +2,4 @@ spec:
   name: dohack
   services:
   - dockerfile_path: Dockerfile
+    name: dohack
