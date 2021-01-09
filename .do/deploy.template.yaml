@@ -1,9 +1,13 @@
 spec:
   name: dohack
+  ports:
+  - name: "80"
+    port: 80
+    targetPort: 80
+
   services:
   - dockerfile_path: Dockerfile
     git:
       branch: master
       repo_clone_url: https://github.com/ameysunu/dohack.git
     name: dohack-dockerfile
-    port: 80
