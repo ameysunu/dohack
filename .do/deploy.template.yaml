@@ -1,6 +1,6 @@
 spec:
   name: dohack
-  
+  expose: "80"
   services:
   - dockerfile_path: Dockerfile
     git:
